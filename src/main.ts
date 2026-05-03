@@ -2,15 +2,13 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { GlobalExceptionFilter } from './global/global.err';
-
+import { config } from './config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // ✅ Global API prefix
-  app.setGlobalPrefix('api/v1');
+  app.setGlobalPrefix(config.apiPrefix);
 
-  // ✅ Global validation
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -19,20 +17,18 @@ async function bootstrap() {
     }),
   );
 
-  // ✅ Global error handler
   app.useGlobalFilters(new GlobalExceptionFilter());
 
-  // ✅ CORS
   app.enableCors({
-    origin: '*', // production এ FRONTEND_URL use করবে
+    origin: config.corsOrigin,
     credentials: true,
   });
 
-  const PORT = process.env.PORT || 3000;
+  await app.listen(config.port);
 
-  await app.listen(PORT);
-
-  console.log(`🚀 Server running on http://localhost:${PORT}/api/v1`);
+  console.log(
+    `Server running on http://localhost:${config.port}/${config.apiPrefix}`,
+  );
 }
 
 bootstrap();
