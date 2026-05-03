@@ -4,10 +4,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { PrismaModule } from '../prisma/prisma.module';
-import { SurahModule } from './surah/surah.module';
-import { AyahModule } from './ayah/ayah.module';
-import { SearchModule } from './search/search.module';
-import { AudioModule } from './audio/audio.module';
+import { SurahModule } from './modules/surah/surah.module';
+import { AyahModule } from './modules/ayah/ayah.module';
+import { SearchModule } from './modules/search/search.module';
+import { AudioModule } from './modules/audio/audio.module';
 
 
 @Module({
