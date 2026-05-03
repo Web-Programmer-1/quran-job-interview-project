@@ -1,0 +1,16 @@
+model Surah {
+  id              Int             @id   // 1–114
+  nameArabic      String
+  nameEnglish     String
+  nameMeaning     String
+  revelationPlace RevelationPlace
+  ayahCount       Int
+
+  ayahs Ayah[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("surahs")
+  @@index([nameArabic])
+}

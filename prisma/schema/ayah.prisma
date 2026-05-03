@@ -1,0 +1,17 @@
+model Ayah {
+  id           String @id @default(uuid())
+  surahId      Int
+  ayahNumber   Int
+  globalNumber Int @unique
+  arabicText   String
+
+  surah        Surah         @relation(fields: [surahId], references: [id], onDelete: Cascade)
+  translations Translation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([surahId, ayahNumber])
+  @@index([surahId])
+  @@map("ayahs")
+}

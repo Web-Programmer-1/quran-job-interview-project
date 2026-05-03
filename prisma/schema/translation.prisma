@@ -1,0 +1,16 @@
+model Translation {
+  id         String @id @default(uuid())
+  ayahId     String
+  language   String
+  translator String
+  text       String
+
+  ayah Ayah @relation(fields: [ayahId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([ayahId])
+  @@index([language])
+  @@map("translations")
+}

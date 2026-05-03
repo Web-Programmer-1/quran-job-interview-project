@@ -2,9 +2,13 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
+
 import { PrismaModule } from '../prisma/prisma.module';
-import { ModuleModule } from './course/module/module.module';
+import { SurahModule } from './surah/surah.module';
+import { AyahModule } from './ayah/ayah.module';
+import { SearchModule } from './search/search.module';
+import { AudioModule } from './audio/audio.module';
+
 
 @Module({
   imports: [
@@ -12,8 +16,11 @@ import { ModuleModule } from './course/module/module.module';
       isGlobal: true,
     }),
     PrismaModule,
-    AuthModule,
-    ModuleModule,
+    SurahModule,
+    AyahModule,
+    SearchModule,
+    AudioModule,
+
   ],
   controllers: [AppController],
   providers: [AppService],
